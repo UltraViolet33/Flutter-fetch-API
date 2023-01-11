@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+List<Person> personFromJson(String str) =>
+    List<Person>.from(json.decode(str).map((x) => Person.fromJson(x)));
+
 Future<Album> fetchAlbum() async {
   final response = await http
       .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
@@ -12,6 +15,47 @@ Future<Album> fetchAlbum() async {
   } else {
     throw Exception("Failed to load resources");
   }
+}
+
+Future<List<Person>> fetchPersons() async {
+  final response = await http.get(Uri.parse(
+      "https://bb78-2a01-cb00-8a61-d100-dce1-5798-96dc-eab.ngrok.io/profile?_page=1"));
+
+  if (response.statusCode == 200) {
+    // print(response.body);
+    List<Person> persons = personFromJson(response.body);
+    return persons;
+  } else {
+    throw Exception("Failed to load resources");
+  }
+}
+
+class Person {
+  final int id;
+  final String firstname;
+  final String lastname;
+  final String email;
+  final String gender;
+
+  Person(
+      {required this.id,
+      required this.firstname,
+      required this.lastname,
+      required this.email,
+      required this.gender});
+
+  factory Person.fromJson(Map<String, dynamic> json) {
+    return Person(
+        id: json["id"],
+        firstname: json["first_name"],
+        lastname: json["last_name"],
+        email: json["email"],
+        gender: json["gender"]);
+  }
+
+  // factory Person.fromJson(Map<String, dynamic> json) {
+  //   return Person(userId: json["userId"], id: json["id"], title: json["title"]);
+  // }
 }
 
 class Album {
@@ -43,11 +87,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Future<Album> futureAlbum;
+  late Future<List<Person>> _persons;
+  // List<Person> convertStringToPersons(String json) {
+  //   dynamic jsonObject = jsonDecode(json);
+  // }
 
   @override
   void initState() {
     super.initState();
     futureAlbum = fetchAlbum();
+    _persons = fetchPersons();
   }
 
   // This widget is the root of your application.
@@ -63,11 +112,15 @@ class _MyAppState extends State<MyApp> {
           title: const Text("Test fetch an API"),
         ),
         body: Center(
-            child: FutureBuilder<Album>(
-                future: futureAlbum,
+            child: FutureBuilder<List<Person>>(
+                future: _persons,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Text(snapshot.data!.title);
+                    return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return Text(snapshot.data?[index].firstname ?? "ok");
+                        });
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
