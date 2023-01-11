@@ -19,7 +19,7 @@ Future<Album> fetchAlbum() async {
 
 Future<List<Person>> fetchPersons() async {
   final response = await http.get(Uri.parse(
-      "https://bb78-2a01-cb00-8a61-d100-dce1-5798-96dc-eab.ngrok.io/profile?_page=1"));
+      "https://c8ab-2a01-cb00-8a61-d100-484b-e5ca-90cb-6a8e.ngrok.io/profile?_page=1"));
 
   if (response.statusCode == 200) {
     // print(response.body);
@@ -119,7 +119,33 @@ class _MyAppState extends State<MyApp> {
                     return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return Text(snapshot.data?[index].firstname ?? "ok");
+                          // return Text(snapshot.data?[index].firstname ?? "ok");
+
+                          return Container(
+                              padding: const EdgeInsets.all(2),
+                              height: 140,
+                              child: Card(
+                                elevation: 5,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(snapshot.data![index].firstname),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.blue),
+                                      ),
+                                      child: const Text("See more"),
+                                      onPressed: (() => ""),
+                                    )
+                                  ],
+                                ),
+                              ));
                         });
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
