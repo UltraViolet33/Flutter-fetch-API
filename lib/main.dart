@@ -19,7 +19,7 @@ Future<Album> fetchAlbum() async {
 
 Future<List<Person>> fetchPersons() async {
   final response = await http.get(Uri.parse(
-      "https://c8ab-2a01-cb00-8a61-d100-484b-e5ca-90cb-6a8e.ngrok.io/profile?_page=1"));
+      "https://13cd-2a01-cb00-8a61-d100-49da-3c90-9866-2ad1.ngrok.io/profile?_page=1"));
 
   if (response.statusCode == 200) {
     // print(response.body);
