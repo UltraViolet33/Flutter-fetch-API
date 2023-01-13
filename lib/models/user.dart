@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 import 'adress.dart';
 import 'company.dart';

@@ -3,7 +3,7 @@ import "package:fetch_api_test/models/user.dart";
 import "package:fetch_api_test/constants.dart";
 
 class ApiServices {
-  Future<List<User>> fetchPersons() async {
+  Future<List<User>> fetchUsers() async {
     var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.usersEndpoint);
     final response = await http.get(url);
 
