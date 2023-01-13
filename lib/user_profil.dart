@@ -8,6 +8,21 @@ class UserProfil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      title: "User profil",
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text("User profil"),
+          ),
+          body: Container(
+            margin: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(3.0),
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+           
+              
+            ),
+          )),
+    );
   }
 }

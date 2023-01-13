@@ -1,4 +1,5 @@
 import 'package:fetch_api_test/models/user.dart';
+import 'package:fetch_api_test/user_profil.dart';
 import 'package:flutter/material.dart';
 
 class UserItem extends StatelessWidget {
@@ -25,16 +26,13 @@ class UserItem extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.blue),
                 ),
-                onPressed: () => {},
-                child: const Text("see more"),
+                onPressed: (() => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfil(user: user)),
+                    )),
+                child: const Text("See more"),
               )
-              //   onPressed: (() => Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => const SecondRoute()),
-              //       )),
-              //   child: const Text("See more"),
-              // )
             ],
           ),
         ));
