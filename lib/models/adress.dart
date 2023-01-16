@@ -30,4 +30,7 @@ class Address {
         "zipcode": zipcode,
         "geo": geo.toJson(),
       };
+
+
+  
 }
