@@ -1,4 +1,5 @@
 import 'package:fetch_api_test/models/user.dart';
+import 'package:fetch_api_test/widgets/company_data.dart';
 import 'package:flutter/material.dart';
 import 'package:fetch_api_test/widgets/user_data.dart';
 
@@ -23,9 +24,8 @@ class UserProfil extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  UserData(
-                    user: user,
-                  )
+                  UserData(user: user),
+                  CompanyData(company: user.company)
                 ],
               ),
             ),
