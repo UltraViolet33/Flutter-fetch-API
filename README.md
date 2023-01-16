@@ -1,1 +1,1 @@
-# Flutter to practice API requests with Flutter
+# Flutter app to practice API requests with Flutter
