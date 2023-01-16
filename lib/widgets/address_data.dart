@@ -1,4 +1,5 @@
 import 'package:fetch_api_test/models/adress.dart';
+import 'package:fetch_api_test/widgets/geo_data.dart';
 import 'package:flutter/material.dart';
 
 class AdressData extends StatelessWidget {
@@ -27,6 +28,7 @@ class AdressData extends StatelessWidget {
               Text('Zip code: ${address.zipcode}'),
               Text('Streey : ${address.street}'),
               Text('Suite : ${address.suite}'),
+              GeoData(geo: address.geo)
             ],
           )
         ],
